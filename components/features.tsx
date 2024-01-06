@@ -1,169 +1,137 @@
-'use client'
+"use client";
 
-import { useState, useRef, useEffect } from 'react'
-import { Transition } from '@headlessui/react'
-import Image from 'next/image'
-import FeaturesBg from '@/public/images/features-bg.png'
-import FeaturesElement from '@/public/images/features-element.png'
+import { useState, useRef, useEffect } from "react";
+import { Transition } from "@headlessui/react";
+import Image from "next/image";
+import FeaturesBg from "@/public/images/features-bg.png";
+import FeaturesBg2 from "@/public/images/features-bg2.png";
+import FeaturesBg3 from "@/public/images/features-bg3.png";
+type StaticImageData = {
+  src: string;
+  height: number;
+  width: number;
+  blurDataURL?: string;
+};
 
 export default function Features() {
-  
-  const [tab, setTab] = useState<number>(1)
+  const [tab, setTab] = useState<number>(1);
 
-  const tabs = useRef<HTMLDivElement>(null)
+  const tabs = useRef<HTMLDivElement>(null);
 
   const heightFix = () => {
-    if (tabs.current && tabs.current.parentElement) tabs.current.parentElement.style.height = `${tabs.current.clientHeight}px`
-  }
+    if (tabs.current && tabs.current.parentElement)
+      tabs.current.parentElement.style.height = `${tabs.current.clientHeight}px`;
+  };
 
   useEffect(() => {
-    heightFix()
-  }, []) 
+    heightFix();
+  }, []);
 
   return (
-    <section className="relative">
-
+    <section id="services" className="relative">
       {/* Section background (needs .relative class on parent and next sibling elements) */}
-      <div className="absolute inset-0 bg-gray-100 pointer-events-none mb-16" aria-hidden="true"></div>
+      <div
+        className="absolute inset-0 bg-bg-300 pointer-events-none mb-16"
+        aria-hidden="true"
+      ></div>
       <div className="absolute left-0 right-0 m-auto w-px p-px h-20 bg-gray-200 transform -translate-y-1/2"></div>
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
         <div className="pt-12 md:pt-20">
-
           {/* Section header */}
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
-            <h1 className="h2 mb-4">Explore the solutions</h1>
-            <p className="text-xl text-gray-600">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat.</p>
+            <h1 className="h2 mb-4 text-primary-100">Explorez nos solutions</h1>
+            <p className="text-xl text-text-100">
+              Renforcez votre présence en ligne avec nos services de gestion des
+              médias sociaux. Nous intégrons des stratégies personnalisées pour
+              engager de manière exceptionnelle vos clients
+            </p>
           </div>
+          <Feature
+            title="Gestion des réseaux sociaux"
+            image={FeaturesBg}
+            description="
+          Nous surveillons et améliorons activement votre image de marque en
+          ligne, en gérant les retours clients et en répondant aux critiques de
+          manière constructive pour renforcer la perception positive de votre
+          entreprise sur les réseaux sociaux."
+          />
+          <Feature
+            reversed
+            title="Stratégie des Réseaux Sociaux"
+            image={FeaturesBg2}
+            description="
+Nous élaborons une stratégie sur mesure pour les médias sociaux, en choisissant les plateformes adaptées et en définissant une ligne éditoriale pertinente, pour engager efficacement votre audience et accroître votre visibilité en ligne. "
+          />
+          <Feature
+            title="Analyse et Reporting des Performances"
+            image={FeaturesBg3}
+            description="Grâce à des outils avancés, nous fournissons des analyses détaillées de vos campagnes sur les réseaux sociaux, permettant d'ajuster les stratégies en fonction des réactions des internautes pour optimiser les performances et le retour sur investissement."
+          />
 
           {/* Section content */}
-          <div className="md:grid md:grid-cols-12 md:gap-6">
-
-            {/* Content */}
-            <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-7 lg:col-span-6 md:mt-6" data-aos="fade-right">
-              <div className="md:pr-4 lg:pr-12 xl:pr-16 mb-8">
-                <h3 className="h3 mb-3">Powerful suite of tools</h3>
-                <p className="text-xl text-gray-600">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa.</p>
-              </div>
-              {/* Tabs buttons */}
-              <div className="mb-8 md:mb-0">
-                <a
-                  className={`flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 1 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-200 border-transparent'}`}
-                  href="#0"
-                  onClick={(e) => { e.preventDefault(); setTab(1); }}
-                >
-                  <div>
-                    <div className="font-bold leading-snug tracking-tight mb-1">Building the Simple ecosystem</div>
-                    <div className="text-gray-600">Take collaboration to the next level with security and administrative features built for teams.</div>
-                  </div>
-                  <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
-                    <svg className="w-3 h-3 fill-current" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M11.953 4.29a.5.5 0 00-.454-.292H6.14L6.984.62A.5.5 0 006.12.173l-6 7a.5.5 0 00.379.825h5.359l-.844 3.38a.5.5 0 00.864.445l6-7a.5.5 0 00.075-.534z" />
-                    </svg>
-                  </div>
-                </a>
-                <a
-                  className={`flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 2 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-200 border-transparent'}`}
-                  href="#0"
-                  onClick={(e) => { e.preventDefault(); setTab(2); }}
-                >
-                  <div>
-                    <div className="font-bold leading-snug tracking-tight mb-1">Building the Simple ecosystem</div>
-                    <div className="text-gray-600">Take collaboration to the next level with security and administrative features built for teams.</div>
-                  </div>
-                  <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
-                    <svg className="w-3 h-3 fill-current" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M11.854.146a.5.5 0 00-.525-.116l-11 4a.5.5 0 00-.015.934l4.8 1.921 1.921 4.8A.5.5 0 007.5 12h.008a.5.5 0 00.462-.329l4-11a.5.5 0 00-.116-.525z" fillRule="nonzero" />
-                    </svg>
-                  </div>
-                </a>
-                <a
-                  className={`flex items-center text-lg p-5 rounded border transition duration-300 ease-in-out mb-3 ${tab !== 3 ? 'bg-white shadow-md border-gray-200 hover:shadow-lg' : 'bg-gray-200 border-transparent'}`}
-                  href="#0"
-                  onClick={(e) => { e.preventDefault(); setTab(3); }}
-                >
-                  <div>
-                    <div className="font-bold leading-snug tracking-tight mb-1">Building the Simple ecosystem</div>
-                    <div className="text-gray-600">Take collaboration to the next level with security and administrative features built for teams.</div>
-                  </div>
-                  <div className="flex justify-center items-center w-8 h-8 bg-white rounded-full shadow flex-shrink-0 ml-3">
-                    <svg className="w-3 h-3 fill-current" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M11.334 8.06a.5.5 0 00-.421-.237 6.023 6.023 0 01-5.905-6c0-.41.042-.82.125-1.221a.5.5 0 00-.614-.586 6 6 0 106.832 8.529.5.5 0 00-.017-.485z" fill="#191919" fillRule="nonzero" />
-                    </svg>
-                  </div>
-                </a>
-              </div>
-            </div>
-
-            {/* Tabs items */}
-            <div className="max-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1">
-              <div className="transition-all">
-                <div className="relative flex flex-col text-center lg:text-right" data-aos="zoom-y-out" ref={tabs}>
-                  {/* Item 1 */}
-                  <Transition
-                    show={tab === 1}
-                    appear={true}
-                    className="w-full"
-                    enter="transition ease-in-out duration-700 transform order-first"
-                    enterFrom="opacity-0 translate-y-16"
-                    enterTo="opacity-100 translate-y-0"
-                    leave="transition ease-in-out duration-300 transform absolute"
-                    leaveFrom="opacity-100 translate-y-0"
-                    leaveTo="opacity-0 -translate-y-16"
-                    beforeEnter={() => heightFix()}
-                    unmount={false}                     
-                  >
-                    <div className="relative inline-flex flex-col">
-                      <Image className="md:max-w-none mx-auto rounded" src={FeaturesBg} width={500} height="462" alt="Features bg" />
-                      <Image className="md:max-w-none absolute w-full left-0 transform animate-float" src={FeaturesElement} width={500} height="44" alt="Element" style={{ top: '30%' }} />
-                    </div>
-                  </Transition>
-                  {/* Item 2 */}
-                  <Transition
-                    show={tab === 2}
-                    appear={true}
-                    className="w-full"
-                    enter="transition ease-in-out duration-700 transform order-first"
-                    enterFrom="opacity-0 translate-y-16"
-                    enterTo="opacity-100 translate-y-0"
-                    leave="transition ease-in-out duration-300 transform absolute"
-                    leaveFrom="opacity-100 translate-y-0"
-                    leaveTo="opacity-0 -translate-y-16"
-                    beforeEnter={() => heightFix()}
-                    unmount={false}                     
-                  >
-                    <div className="relative inline-flex flex-col">
-                      <Image className="md:max-w-none mx-auto rounded" src={FeaturesBg} width={500} height="462" alt="Features bg" />
-                      <Image className="md:max-w-none absolute w-full left-0 transform animate-float" src={FeaturesElement} width={500} height="44" alt="Element" style={{ top: '30%' }} />
-                    </div>
-                  </Transition>
-                  {/* Item 3 */}
-                  <Transition
-                    show={tab === 3}
-                    appear={true}
-                    className="w-full"
-                    enter="transition ease-in-out duration-700 transform order-first"
-                    enterFrom="opacity-0 translate-y-16"
-                    enterTo="opacity-100 translate-y-0"
-                    leave="transition ease-in-out duration-300 transform absolute"
-                    leaveFrom="opacity-100 translate-y-0"
-                    leaveTo="opacity-0 -translate-y-16"
-                    beforeEnter={() => heightFix()}
-                    unmount={false}                     
-                  >
-                    <div className="relative inline-flex flex-col">
-                      <Image className="md:max-w-none mx-auto rounded" src={FeaturesBg} width={500} height="462" alt="Features bg" />
-                      <Image className="md:max-w-none absolute w-full left-0 transform animate-float" src={FeaturesElement} width={500} height="44" alt="Element" style={{ top: '30%' }} />
-                    </div>
-                  </Transition>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
         </div>
       </div>
     </section>
-  )
+  );
+}
+type FeatureTypes = {
+  title: string;
+  description: string;
+  image: StaticImageData;
+  reversed?: boolean;
+};
+
+function Feature({
+  reversed,
+  title,
+  description,
+  image,
+}: FeatureTypes): JSX.Element {
+  return (
+    <div
+      className={`flex flex-col-reverse ${
+        reversed
+          ? "lg:flex-row-reverse md:flex-row-reverse"
+          : "lg:flex-row md:flex-row"
+      } md:flex-row  md:max-w-none w-full mx-auto md:col-span-7 lg:col-span-6 md:mt-6`}
+      data-aos="fade-right"
+    >
+      <div className="flex flex-col justify-center w-full lg:w-1/2 md:w-1/2 md:pr-4 lg:pr-12 xl:pr-16 mb-8">
+        <h4 className="h3 mb-3 text-primary-100">{title}</h4>
+        <p className="text-xl text-text-200">{description}</p>
+      </div>
+      <div className="w-full lg:w-1/2 md:w-1/2m ax-w-xl md:max-w-none md:w-full mx-auto md:col-span-5 lg:col-span-6 mb-8 md:mb-0 md:order-1">
+        <div className="transition-all">
+          <div
+            className="relative flex flex-col text-center lg:text-right"
+            data-aos="zoom-y-out"
+          >
+            <Transition
+              appear={true}
+              show={true}
+              className="w-full"
+              enter="transition ease-in-out duration-700 transform order-first"
+              enterFrom="opacity-0 translate-y-16"
+              enterTo="opacity-100 translate-y-0"
+              leave="transition ease-in-out duration-300 transform absolute"
+              leaveFrom="opacity-100 translate-y-0"
+              leaveTo="opacity-0 -translate-y-16"
+              unmount={false}
+            >
+              <div className="relative inline-flex flex-col">
+                <Image
+                  className="md:max-w-none mx-auto rounded"
+                  src={image}
+                  width={500}
+                  height="462"
+                  alt="Features bg"
+                />
+              </div>
+            </Transition>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
